@@ -1,0 +1,554 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>chartmychat.com</title>
+
+    <script>
+        if (window.location.href != "https://www.chartmychat.com/")
+            window.location.replace("https://www.chartmychat.com/");
+    </script>
+
+    <script data-ad-client="ca-pub-2330589304417302" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    <link href="twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link href="css/site.css" rel="stylesheet" />
+    <link href="css/cookieconsent.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+
+    <script src="js/dummyConversation.js"></script>
+    <script src="js/dummygroup.js"></script>
+
+    <script src="js/loadingmain.js"></script>
+    <link href="css/loadingmain.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="wrapper">
+        <div class="myhead d-none d-md-block">
+            <div class="row">
+                <div class="headtextcontainer col-lg-6 col-sm-12">
+                    <div class="headtext">
+                        <div>Your <span class="messblue">Messenger</span> Chats</div>
+                        <div>Visualized</div>
+                        <div class="headdesc mt-5">chartyourchat.com is generating data visualizations and interactive charts of your messenger chats.
+                        <br/>Works for both normal chats and group chats.    
+                        </div cl>
+                        
+                        <div class="headbutton">
+                            <a href="#load">
+                                <button class="btn btn-primary btn-lg">Start</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="headsvg col-lg-6 col-sm-12">
+                    <img class="browser" src="images/final2.svg" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="myheadmob d-sm-block d-md-none">
+            <div class="headtextmob">
+                <div>Your <span class="messblue">Messenger</span> Chats</div>
+                <div>Visualized</div>
+                <div class="headdescmob mt-5">chartyourchat.com is generating data visualizations and interactive charts of your messenger chats.</div cl>
+            </div>
+            <div class="row mt-5">
+                <div class="col-8">
+                    <img class="browsermob" src="images/final2.svg" alt="">
+                </div>
+                <div class="col-4 headbuttonmob">
+                    <a href="#tutorial">
+                        <button class="btn btn-primary btn-lg">Start</button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="load" class="myheader row">
+
+            <div class="headerinner col-6">
+                <div class="innerheadline">Drop files here or click to upload</div>
+                <div class="further">(See the tutorial below for further instructions)</div c>
+                <div id="filedrag" class="file-load pt-2 float-left">
+                    <p class="hcenter">Upload files</p>
+                    <input type="file" class="" id="selectFiles" value="Import" multiple hidden />
+                </div>
+                <div id="element_id" class="lv-circles lv-mid md float-left ml-3" data-label="Loading..."></div>
+
+                <p id="notjsonId" class="notjson"></p>
+            </div>
+
+
+            <div id="demo" class="container col-6 demo pt-5">
+                <div class="alert alert-primary hcenter hcenterdiv try">
+                    Or try the demo with dummy data... <br />
+                    <button type="button" id="dummyButton" class="mt-2 btn btn-primary btn-lg">Normal Chat</button>
+                    <button type="button" id="groupDummyButton" class="mt-2 btn btn-primary btn-lg">Group Chat</button>
+                </div>
+            </div>
+        </div>
+
+        <ul id="fileUl" class="hide"></ul>
+
+
+        <div class="visit alert alert-danger mt-5 d-md-none d-sm-block">
+            Visit us on desktop to upload your own chat and see your stats.
+            <br/>See the tutorial down below to download your message data from Facebook.
+            <div class="row">
+                <div class="col-6">            
+                    <button id="viewdemo" class="btn btn-primary m-2">Normal demo</button>
+                </div>
+                <div class="col-6">            
+                    <button id="viewgroupdemo" class="btn btn-primary m-2">Group demo</button>
+                </div>
+            </div>
+            <img id="demopic" src="images/full2.jpg" alt="">
+            <img id="demogrouppic" src="images/fullfg.jpg">
+        </div>
+
+        <script>
+            var normald = document.getElementById("viewdemo");
+            var normalp = document.getElementById("demopic");
+            normalp.style.display = "none";
+
+            var groupd = document.getElementById("viewgroupdemo");
+            var groupp = document.getElementById("demogrouppic");
+            groupp.style.display = "none";
+
+            normald.addEventListener("click", function(){
+                groupp.style.display = "none";
+                groupd.innerHTML = "View group demo";
+                if (normalp.style.display == "none"){
+                    normalp.style.display = "block";
+                    normald.innerHTML = "Close demo";
+                }
+                else if(normalp.style.display == "block"){
+                    normalp.style.display = "none";
+                    normald.innerHTML = "View demo";
+                }
+
+
+            });
+
+
+            groupd.addEventListener("click", function(){
+                normalp.style.display = "none";
+                normald.innerHTML = "View demo";
+                if(groupp.style.display == "none"){
+                    groupp.style.display = "block";
+                    groupd.innerHTML = "Close group demo";
+                }
+                else if(groupp.style.display == "block"){
+                    groupp.style.display = "none";
+                    groupd.innerHTML = "View group demo";
+                }
+            })
+
+
+        </script>
+
+
+
+        <div id="tutorial" class="tutorial container pt-5">
+            <div class="alert alert-danger promise">
+                <h2>Don't worry...</h2>
+                We value your privacy and we do not misuse your personal information. <br />
+                <span class="font-weight-bold">None of your chat data is uploaded to a server.</span> <br />
+                Everything in terms of chat upload remains <span class="font-weight-bold">client-side</span>, all chat data processing
+                happens directly on your computer. <br />
+                We want this app to be 100% transparent, therefore the whole source code is available on github.
+            </div>
+            <div class="htd mt-5 mb-3">How to download chat data from facebook</div>
+			<div id="iPhoneWrap">
+				<div id="iPhone" class="active float-left">
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide slide1">
+								<div class="highlight one">
+									<div class="hightext">1</div>
+								</div>
+								<div class="highlight two">
+									<div class="hightext">2</div>
+								</div>
+							</div>
+							<div class="swiper-slide slide2"><div class="highlight"></div></div>
+							<div class="swiper-slide slide3">
+								<div class="highlight one">
+									<div class="hightext">1</div>
+								</div>
+								<div class="highlight two">
+									<div class="hightext">2</div>
+								</div>
+								<div class="highhand">
+									<div class="handtext">3</div>	
+								</div>
+							</div>
+							<div class="swiper-slide slide4"><div class="highlight"></div></div>
+							<div class="swiper-slide slide5"><div class="highlight"></div></div>
+						</div>
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+			</div>
+		
+			<div class="description float-left">
+				<ol>
+					<li class="liid1 active"><span class="wrap">Open your facebook app (mobile or browser) and go to settings</span></li>
+					<li class="liid2"><span class="wrap">Scroll down to the subsection "Your Facebook Information" and click on "Download Your Information"</span></li>
+					<li class="liid3"><span class="wrap">Deselect all the options excepts the messages, then scroll down</span></li>
+					<li class="liid4"><span class="wrap">
+						• Under the "Data Range" select "All of my data"
+						<br/>• Under "Format" select "JSON" !!! - important part, your messages will not be analyzed in HTML format, so please make sure that the JSON format is selected
+						<br/>• Under "Media Quality" select "Low" quality
+						<br/>• Finally hit the "CREATE FILE" button</span>
+					</li>
+					<li class="liid5"><span class="wrap">
+						• After creating your file, your request will appear in "AVAILABLE COPIES" tab, it might take up to couple of hours until facebook finishes preparing your copy.
+						<br/>• You will be notified when the file is ready for you to download
+					</span></li>
+				</ol>
+			</div>
+			<div class="cistic"></div>
+		</div i>
+
+
+
+
+
+
+        <section id="capture" class="capture">
+            <div class="container analysis">
+                <div class="row mt-3 mb-3">
+                    <div id="basicinfo" class="col-7 basicinfo"></div>
+                    <div class="col-5">
+                        <div id="basicrange" class="basicrange vertical-center">
+                            <p class="hcenter timespan">Timespan</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-10">
+                        <p class="hcenter title">Timeline</p>
+                        <canvas id="timelineId" style=""></canvas>
+                    </div>
+                    <div class="col-2 pt-5 mt-5 datepicking">
+                        <p>Select your custom timespan</p>
+                        <div class="mt-2">From</div>
+                        <input type="date" id="dateFromId" name="name" />
+                        <br />
+                        <div class="mt-2">To</div>
+                        <input type="date" id="dateToId" name="name" />
+                        <br />
+
+                        <div class="row pl-2 mt-2">
+                            <div class="col-6 p-2"><button id="dateApplyId" class="btn btn-primary">Apply</button></div>
+                            <div class="col-6 p-2"><button id="dateRevertId" class="btn btn-secondary">Revert</button></div>
+                        </div>
+                        <div id="invalidDate" class="alert-danger pl-2"></div>
+                    </div>
+                </div>
+
+                <div class="row pt-5">
+                    <div class="piechart col-4">
+                        <div class="hcenter title">Sent messages</div>
+                        <div id="leftlabelSent" class="leftlabel label"></div>
+                        <div id="rightlabelSent" class="rightlabel label float-right"></div>
+                        <canvas id="totalTextsId" class=""></canvas>
+                    </div>
+
+                    <div class="col-4">
+                        <p class="hcenter groupSMH title">Total texts in chat</p>
+                        <hr />
+                        <p class="hcenter groupSM" id="bothSentMessages"></p>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="hcenter title">Conversation starts</div>
+                        <div id="leftlabelInits" class="leftlabel label"></div>
+                        <div id="rightlabelInits" class="rightlabel label float-right"></div>
+                        <canvas id="initsId"></canvas>
+                    </div>
+                </div>
+
+                <div class="row pt-5">
+                    <div class="col-4">
+                        <div class="hcenter title">Weekdays</div>
+                        <canvas height="250" id="weekdaysId"></canvas>
+                    </div>
+                    <div class="col-8">
+                        <p class="hcenter title">Activity throughout the day</p>
+                        <canvas id="timesChart"></canvas>
+                    </div>
+                </div>
+
+
+                <div class=" mt-5 mb-5 row d-none">
+                    <!--<div class="col-4">
+                        <p class="hcenter">Conversation Inits</p>
+                        <div id="leftlabelInits" class="leftlabel"></div>
+                        <div id="rightlabelInits" class="rightlabel float-right"></div>
+                        <canvas id="initsId"></canvas>
+                    </div>-->
+                    <div class="col-4">
+                        <div class="hcenter title">Messages per Reply</div>
+                        <canvas id="mprId"></canvas>
+                    </div>
+                    <div class="col-4">
+                        <div class="hcenter title">Average message length</div>
+                        <canvas id="messLenId"></canvas>
+                    </div>
+                    <div class="col-4">
+                        <div class="vertical-center totals">
+                            <div id="totalWords"></div>
+                            <div id="totalLetters"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row mt-5">
+                    <div class="col-6">
+                        <p class="hcenter h2 poppins" id="statsName"></p>
+                        <hr />
+                    </div>
+                    <div class="col-6">
+                        <p class="hcenter h2 poppins" id="statsName2"></p>
+                        <hr />
+                    </div>
+                </div>
+
+
+                <div class="mt-3 row">
+                    <!--EMOJIS!!!-->
+                    <div class="col-6">
+                        <div class="hcenter title">Most used emojis</div>
+                        <div><div class="hcenter"><input class="myinput" id="emojiInputId" type="text" placeholder="Search for an emoji" disabled /></div></div>
+                        <div class="rank float-left">
+                            <ul id="emojiRankUl" class="emojiRankUl"></ul>
+                        </div>
+                        <div class="emojiIcons float-left ml-2">
+                            <ul id="emojiUl" class="emojiUl"></ul>
+                        </div>
+                        <div class="emojiChart float-left"><canvas id="myemojiChart"></canvas></div>
+                        <div class="cistic"></div>
+                    </div>
+
+
+                    <div class="col-6">
+                        <div class="hcenter title">Most used emojis</div>
+                        <div><div class="hcenter"><input class="myinput" id="emojiInputId2" type="text" placeholder="Search for an emoji" disabled /> </div></div>
+                        <div class="rank float-left ml-2">
+                            <ul id="emojiRankUl2" class="emojiRankUl"></ul>
+                        </div>
+                        <div class="emojiIcons float-left ml-2">
+                            <ul id="emojiUl2" class="emojiUl"></ul>
+                        </div>
+                        <div class="emojiChart float-left"><canvas id="myemojiChart2"></canvas></div>
+                        <div class="cistic"></div>
+                    </div>
+
+                </div>
+
+                <div class="mt-5 row">
+                    <!--WORDS-->
+                    <div class="col-6">
+                        <div class="hcenter title">Most used words</div>
+                        <div><div class="hcenter"><input class="myinput" id="wordInputId" type="text" placeholder="Search for a word" /></div></div>
+                        <div class="rank float-left">
+                            <ul id="wordRankUl" class="wordRankUl"></ul>
+                        </div>
+                        <div class="wordCounts float-left ml-2"><canvas id="wordCountsChart"></canvas></div>
+                        <div class="cistic"></div>
+                    </div>
+                    <div class="col-6">
+                        <div class="hcenter title">Most used words</div>
+                        <div><div class="hcenter"><input class="myinput" id="wordInputId2" type="text" placeholder="Search for a word" /></div></div>
+                        <div class="rank float-left">
+                            <ul id="wordRankUl2" class="wordRankUl"></ul>
+                        </div>
+                        <div class="wordCounts float-left ml-2"><canvas id="wordCountsChart2"></canvas></div>
+                        <div class="cistic"></div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-6 stats">
+                        <ul id="statsUl" class="statsUl"></ul>
+                    </div>
+                    <div class="col-6 stats2">
+                        <ul id="statsUl2" class="statsUl"></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+        <button type="button" id="makeImageButton" class="d-none">Download as image</button>
+        <p id="groupChatId"></p>
+
+
+
+
+
+
+        <section id="capture2" class="capture2">
+            <div class="container">
+                <div id="groupbasicinfo" class="basicinfo mt-3 mb-3">
+                </div>
+                <div class="row mt-3 mb-3">
+                    <div class="col-10">
+                        <canvas id="grouptimelineId" style=""></canvas>
+                    </div>
+                    <div class="col-2 pt-5 datepicking">
+                        <p>Select your custom span range for the graph</p>
+                        <div class="mt-2">From</div>
+                        <input type="date" id="groupdateFromId" name="name" value="" placeholder="Select Date" />
+                        <br />
+                        <div class="mt-2">To</div>
+                        <input type="date" id="groupdateToId" name="name" value="" />
+                        <br />
+
+                        <div class="row pl-2 mt-2">
+                            <div class="col-6 p-2"><button id="groupdateApplyId" class="btn btn-primary">Apply</button></div>
+                            <div class="col-6 p-2"><button id="groupdateRevertId" class="btn btn-secondary">Revert</button></div>
+                        </div>
+                        <div id="groupinvalidDate" class="alert-danger pl-2"></div>
+                    </div>
+                </div>
+
+                <div class="row pt-5">
+                    <div class="col-4">
+                        <p class="hcenter title">Sent messages</p>
+                        <canvas id="sentMessagesPie"></canvas>
+                    </div>
+                    <div class="col-4">
+                        <p class="hcenter groupSMH">Total texts in group chat</p>
+                        <hr />
+                        <p class="hcenter groupSM" id="groupSentMessages"></p>
+                    </div>
+                    <div class="col-4">
+                        <p class="hcenter title">Conversation starts</p>
+                        <canvas id="conInitsPie"></canvas>
+                    </div>
+                </div>
+
+
+                <div class="row pt-5">
+                    <div class="col-4">
+                        <p class="hcenter">Weekdays</p>
+                        <canvas height="250" id="groupweekdaysId"></canvas>
+                    </div>
+                    <div class="col-8">
+                        <p class="hcenter title">Activity throughout the day</p>
+                        <canvas id="grouptimesChart"></canvas>
+                    </div>
+                </div>
+
+                <div id="groupTable" class="groupTable pt-5">
+                </div>
+            </div>
+        </section>
+
+
+        <div id="cookieConsent">
+            <div id="closeCookieConsent">x</div>
+            This website is using cookies. <a href="privacypolicy.html" target="_blank">More info</a>. <a class="cookieConsentOK">That's Fine</a>
+        </div>
+        <script>
+            $(document).ready(function () {
+                setTimeout(function () {
+                    $("#cookieConsent").fadeIn(200);
+                }, 2000);
+                $("#closeCookieConsent, .cookieConsentOK").click(function () {
+                    $("#cookieConsent").fadeOut(200);
+                });
+            });
+        </script>
+
+
+
+        <script>
+            var cap = document.getElementById("capture");
+            cap.style.display = "none";
+
+            var cap2 = document.getElementById("capture2");
+            cap2.style.display = "none";
+
+
+            let element = lv.create(document.getElementById("element_id"));
+            element.hide();
+        </script>
+        <script src="js/senderClass.js"></script>
+        <script src="js/site.js"></script>
+        <script src="js/load.js"></script>
+        <script src="js/unicodeConvert.js"></script>
+        <script src="js/createCharts.js"></script>
+        <script src="js/updateEmojiCharts.js"></script>
+        <script src="js/updateWordCharts.js"></script>
+
+        <script src="js/createGroupCharts.js"></script>
+
+        <script src="js/swiper.min.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                var swiper = new Swiper ('.swiper-container', {
+                    direction: 'horizontal',
+                    loop: false,
+                    autoplay: {
+                        delay: 2500
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                    }
+                });
+
+                swiper.on("slideChange", function(t){
+                    $("li").removeClass("active");
+                    $("li.liid" + (swiper.activeIndex+1)).addClass("active");
+                });
+
+                $("li").click(function(){
+                    console.log($(this).index());
+                    swiper.slideTo($(this).index(), 250);
+                    $("li").removeClass("active");
+                    $(this).addClass("active");
+                });
+            });
+            
+        </script>
+
+        <footer class="mb-5">
+            <div class="container pt-5">
+                <div class="float-left">
+                    <a class="btn btn-primary" href="privacypolicy.html">Privacy Policy</a>
+                </div>
+                
+
+                <div class="float-left ml-5">
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                        <input type="hidden" name="cmd" value="_s-xclick" />
+                        <input type="hidden" name="hosted_button_id" value="PF6FL4QWVMMLU" />
+                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                        <img alt="" border="0" src="https://www.paypal.com/en_CZ/i/scr/pixel.gif" width="1" height="1" />
+                    </form>
+                </div>
+            </div>
+             
+        </footer>
+    </div>
+
+</body>
+</html>
